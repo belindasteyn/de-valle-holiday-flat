@@ -1,0 +1,12 @@
+# Booked dates for 21 De Valle availability calendar
+# Single date, one per line, format: YYYY-MM-DD
+# Whole range (e.g. a booked week): YYYY-MM-DD to YYYY-MM-DD
+# Add a line to mark date(s) as booked. Remove a line to make them available again.
+# Lines starting with # are ignored.
+2026-07-04
+2026-07-05
+2026-07-11
+2026-07-14
+2026-07-22
+2026-07-29
+2026-08-20 to 2026-08-25
