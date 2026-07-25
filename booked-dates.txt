@@ -3,7 +3,10 @@
 # Whole range (e.g. a booked week): YYYY-MM-DD to YYYY-MM-DD
 # Add a line to mark date(s) as booked. Remove a line to make them available again.
 # Lines starting with # are ignored.
-2026-07-25 to 2026-08-23
-2026-09-25 to 2026-10-04
-2026-11-15 to 2026-11-22
-2026-12-01 to 2027-01-31
+2026-07-04
+2026-07-05
+2026-07-11
+2026-07-14
+2026-07-22
+2026-07-29
+2026-08-20 to 2026-08-25

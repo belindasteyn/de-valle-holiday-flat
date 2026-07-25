@@ -1,4 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const siteNav = document.querySelector("[data-site-nav]");
+  if (navToggle && siteNav) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open", isOpen);
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        siteNav.classList.remove("is-open");
+        navToggle.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   const heroSlideshow = document.querySelector("[data-hero-slideshow]");
   if (heroSlideshow) {
     const slides = Array.from(heroSlideshow.querySelectorAll("img"));
@@ -159,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const previousMonthDays = new Date(year, month, 0).getDate();
 
     calendarTitle.textContent = `${monthNames[month]} ${year}`;
+
     calendarGrid.innerHTML = "";
 
     for (let i = startDay - 1; i >= 0; i -= 1) {
@@ -213,7 +232,29 @@ document.addEventListener("DOMContentLoaded", () => {
   enquiryForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const fullName = enquiryForm.fullName.value.trim();
-    confirmationMessage.textContent = `Thank you, ${fullName || "guest"}. Your booking enquiry has been received and bookings are only confirmed once the owner responds.`;
-    enquiryForm.reset();
+    const submitButton = enquiryForm.querySelector("button[type='submit']");
+
+    submitButton.disabled = true;
+    confirmationMessage.textContent = "Sending your enquiry...";
+
+    fetch(enquiryForm.action, {
+      method: "POST",
+      body: new FormData(enquiryForm),
+      headers: { Accept: "application/json" }
+    })
+      .then((response) => {
+        if (response.ok) {
+          confirmationMessage.textContent = `Thank you, ${fullName || "guest"}. Your booking enquiry has been received and bookings are only confirmed once the host responds.`;
+          enquiryForm.reset();
+        } else {
+          confirmationMessage.textContent = "Something went wrong sending your enquiry. Please try again or contact us directly.";
+        }
+      })
+      .catch(() => {
+        confirmationMessage.textContent = "Something went wrong sending your enquiry. Please try again or contact us directly.";
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+      });
   });
 });

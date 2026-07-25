@@ -8,18 +8,23 @@
       name="description"
       content="Stay at 21 De Valle, a luxury holiday flat in Diaz Beach, Mossel Bay. Enjoy a coastal escape with 3 bedrooms, 2 bathrooms, pool, braai area and sea breeze comfort."
     />
-    <link rel="stylesheet" href="assets/css/styles.css?v=2" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=12" />
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top">21 De Valle</a>
-      <nav class="site-nav" aria-label="Primary navigation">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation" data-site-nav>
         <a href="#about">About</a>
         <a href="#amenities">Amenities</a>
         <a href="#pricing">Pricing</a>
         <a href="#gallery">Gallery</a>
         <a href="#availability">Availability</a>
         <a href="#booking">Enquire</a>
+        <a href="#terms">Terms</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -28,7 +33,7 @@
       <section class="hero">
           <div class="hero-content">
           <p class="eyebrow">Luxury Holiday Flat · Diaz Beach</p>
-          <h1>Luxury Beachfront Holiday Apartment</h1>
+          <h1>Luxury Holiday Apartment</h1>
           <p>
             A refined beachside retreat designed for elegant holidays, sun-soaked mornings and effortless coastal living.
           </p>
@@ -52,9 +57,10 @@
             <img src="assets/images/devalle01 (12).jpg" alt="Twin bedroom with two single beds" />
             <img src="assets/images/devalle01 (9).jpg" alt="Luxury bathroom with bathtub" />
             <img src="assets/images/Bathroom.jpeg" alt="Bathroom shower and basin" />
-            <img src="assets/images/devalle01 (5).jpg" alt="Outdoor patio table and seating" />
+            <img src="assets/images/devalle01 (5).jpg" alt="Large open balcony with patio table and seating" />
             <img src="assets/images/devalle01 (7).jpg" alt="Swimming pool and garden setting" />
-            <img src="assets/images/devalle01 (8).jpg" alt="Ocean-facing coastal view" />
+            <img src="assets/images/CoastalView.jpg" alt="Ocean-facing coastal view" />
+            <img src="assets/images/Waterpark.jpg" alt="Nearby waterpark" />
           </div>
         </div>
       </section>
@@ -62,7 +68,7 @@
       <section id="about" class="section">
         <div class="section-heading reveal">
           <p class="eyebrow">About 21 De Valle</p>
-          <h2>A beautifully styled home for unforgettable holiday moments</h2>
+          <h2>Everything you need for a seamless holiday stay</h2>
           <p>
             Thoughtfully appointed for family breaks and relaxed gatherings, 21 De Valle offers the balance of luxury, comfort and easy access to the beach.
           </p>
@@ -73,64 +79,64 @@
             <p>Open spaces, natural light and a serene palette create the perfect holiday atmosphere.</p>
           </article>
           <article class="info-card reveal">
-            <h3>Perfect for Families & Groups</h3>
+            <h3>Perfect for Families</h3>
             <p>With generous sleeping arrangements and inviting shared areas, everyone can unwind in style.</p>
           </article>
           <article class="info-card reveal">
             <h3>Prime Diaz Beach Location</h3>
             <p>Enjoy a short stroll to the shoreline and the charm of Mossel Bay from this premium base.</p>
           </article>
-        </div>
-      </section>
-
-      <section id="highlights" class="section alt-section">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Accommodation Highlights</p>
-          <h2>Everything you need for a seamless holiday stay</h2>
-        </div>
-        <div class="highlights-grid">
-          <article class="highlight-card reveal">
+          <article class="info-card reveal">
             <h3>Spacious Interiors</h3>
             <p>Comfortably arranged living and dining areas that feel airy, warm and welcoming.</p>
           </article>
-          <article class="highlight-card reveal">
+          <article class="info-card reveal">
             <h3>Private Outdoor Enjoyment</h3>
             <p>Appreciate the braai area and pool for laid-back afternoons and evening gatherings.</p>
           </article>
-          <article class="highlight-card reveal">
+          <article class="info-card reveal">
             <h3>Modern Comforts</h3>
             <p>Smart TV, high-speed Wi-Fi and a fully equipped kitchen ensure a relaxing stay.</p>
           </article>
         </div>
       </section>
 
-      <section id="amenities" class="section">
+      <section id="amenities" class="section alt-section">
         <div class="section-heading reveal">
-          <p class="eyebrow">Amenities</p>
-          <h2>Thoughtful features for comfort and convenience</h2>
+          <h2>Amenities</h2>
         </div>
-        <div class="amenities-grid">
-          <article class="amenity-card reveal">
-            <h3>Wi-Fi</h3>
-            <p>Stay connected with ease throughout your stay.</p>
-          </article>
-          <article class="amenity-card reveal">
-            <h3>Braai Area</h3>
-            <p>Enjoy memorable evenings in a relaxed outdoor setting.</p>
-          </article>
-          <article class="amenity-card reveal">
-            <h3>Swimming Pool</h3>
-            <p>Take a refreshing dip just steps from your holiday home.</p>
-          </article>
-          <article class="amenity-card reveal">
-            <h3>Fully Equipped Kitchen</h3>
-            <p>Prepare meals with everything you need for a comfortable stay.</p>
-          </article>
-          <article class="amenity-card reveal">
-            <h3>Smart TV</h3>
-            <p>Unwind with entertainment after a day at the beach.</p>
-          </article>
-        </div>
+        <ul class="amenities-list">
+          <li class="reveal">
+            <span class="amenity-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a17 17 0 0 1 20 0" /><path d="M5.5 12.5a11.5 11.5 0 0 1 13 0" /><path d="M9 16.5a6 6 0 0 1 6 0" /><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none" /></svg>
+            </span>
+            Wi-Fi
+          </li>
+          <li class="reveal">
+            <span class="amenity-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.5c1.3-1.2 2.7-1.2 4 0s2.7 1.2 4 0 2.7-1.2 4 0 2.7-1.2 4-0 2.7-1.2 4 0" /><path d="M2 20c1.3-1.2 2.7-1.2 4 0s2.7 1.2 4 0 2.7-1.2 4 0 2.7-1.2 4-0 2.7-1.2 4 0" /><path d="M6 13V6a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v7" /><path d="M15 13V9a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4" /></svg>
+            </span>
+            Swimming Pool
+          </li>
+          <li class="reveal">
+            <span class="amenity-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v6a2 2 0 0 0 2 2v10" /><path d="M4 3v6" /><path d="M8 3v8" /><path d="M6 3v8" /><path d="M16 3c-1.7 0-3 2.1-3 5.5S14.3 14 16 14s3-2.1 3-5.5S17.7 3 16 3Z" /><path d="M16 14v7" /></svg>
+            </span>
+            Fully Equipped Kitchen
+          </li>
+          <li class="reveal">
+            <span class="amenity-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M9 21h6" /><path d="M12 18v3" /></svg>
+            </span>
+            Smart TV
+          </li>
+          <li class="reveal">
+            <span class="amenity-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 2 2 3.5 1 5 1.8.3 3 1.8 3 3.8A4.2 4.2 0 0 1 12 16a4.2 4.2 0 0 1-4-4.2c0-1.4.7-2.4 1.4-3.3.2 1 .8 1.5 1.4 1.5C11.6 8 10.8 5.5 12 3Z" /><path d="M8 20h8" /><path d="M12 16v4" /></svg>
+            </span>
+            Braai Area
+          </li>
+        </ul>
       </section>
 
       <section id="pricing" class="section alt-section">
@@ -140,23 +146,29 @@
         </div>
         <div class="pricing-grid">
           <article class="pricing-card reveal">
-            <h3>High Season</h3>
-            <p class="price">R2,000 <span>/ night</span></p>
-            <p>December – January</p>
+            <h3>Standard Tariff</h3>
+            <p class="price">R1,150 <span>/ night</span></p>
+            <p>Rest of the year</p>
           </article>
           <article class="pricing-card reveal">
-            <h3>Standard Season</h3>
-            <p class="price">R1,200 <span>/ night</span></p>
-            <p>February – November</p>
+            <h3>Seasonal Tariff 1</h3>
+            <p class="price">R1,650 <span>/ night</span></p>
+            <p>25 Mar – 10 Apr &amp; 25 Sep – 10 Oct</p>
+          </article>
+          <article class="pricing-card reveal">
+            <h3>Seasonal Tariff 2</h3>
+            <p class="price">R2,750 <span>/ night</span></p>
+            <p>1 Dec – 22 Dec &amp; 4 Jan – 20 Jan</p>
           </article>
         </div>
+        <p class="pricing-discount reveal">Save 10% on stays of 7 nights or more</p>
         <p class="pricing-note reveal">Rates are subject to confirmation.</p>
       </section>
 
       <section id="gallery" class="section">
         <div class="section-heading reveal">
           <p class="eyebrow">Photo Gallery</p>
-          <h2>Browse the home and surroundings</h2>
+          <h2>Browse the apartment and surroundings</h2>
         </div>
         <div class="gallery-grid">
           <button class="gallery-card reveal" type="button" data-index="0">
@@ -192,16 +204,20 @@
             <span>Bathroom Shower</span>
           </button>
           <button class="gallery-card reveal" type="button" data-index="9">
-            <img src="assets/images/devalle01 (5).jpg" alt="Outdoor patio table and seating" loading="lazy" />
-            <span>Outdoor Living</span>
+            <img src="assets/images/devalle01 (5).jpg" alt="Large open balcony with patio table and seating" loading="lazy" />
+            <span>Large Open Balcony</span>
           </button>
           <button class="gallery-card reveal" type="button" data-index="10">
             <img src="assets/images/devalle01 (7).jpg" alt="Swimming pool and garden setting" loading="lazy" />
             <span>Pool Area</span>
           </button>
           <button class="gallery-card reveal" type="button" data-index="11">
-            <img src="assets/images/devalle01 (8).jpg" alt="Ocean-facing coastal view" loading="lazy" />
+            <img src="assets/images/CoastalView.jpg" alt="Ocean-facing coastal view" loading="lazy" />
             <span>Coastal View</span>
+          </button>
+          <button class="gallery-card reveal" type="button" data-index="12">
+            <img src="assets/images/Waterpark.jpg" alt="Nearby waterpark" loading="lazy" />
+            <span>Waterpark</span>
           </button>
         </div>
       </section>
@@ -243,15 +259,15 @@
           <div class="booking-copy reveal">
             <h3>Reserve your coastal escape</h3>
             <p>
-              Please share your preferred dates and travel details. Enquiries are reviewed by the owner and bookings are only confirmed once a response is provided.
+              Please share your preferred dates and travel details. Enquiries are reviewed by the host and bookings are only confirmed once a response is provided.
             </p>
             <ul>
               <li>Flexible holiday planning</li>
-              <li>Professional owner follow-up</li>
+              <li>Professional host follow-up</li>
               <li>Personalised booking guidance</li>
             </ul>
           </div>
-          <form id="enquiry-form" class="booking-form reveal">
+          <form id="enquiry-form" class="booking-form reveal" action="https://formspree.io/f/mrenoqee" method="POST">
             <label>
               Full Name
               <input type="text" name="fullName" required />
@@ -285,13 +301,103 @@
               </label>
             </div>
             <label>
-              Message
+              Message (optional)
               <textarea name="message" rows="4" placeholder="Tell us about your stay"></textarea>
             </label>
             <button class="button primary" type="submit">Submit Enquiry</button>
+            <p class="form-terms-note">By submitting, you agree to our <a href="#terms">Terms &amp; Conditions</a>.</p>
             <p id="form-confirmation" class="form-confirmation" aria-live="polite"></p>
           </form>
         </div>
+      </section>
+
+      <section id="terms" class="section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Terms &amp; Conditions</p>
+          <h2>Booking terms and cancellation policy</h2>
+        </div>
+        <details class="policy-accordion reveal">
+          <summary>Booking Terms &amp; Conditions</summary>
+          <div class="policy-content">
+            <h4>1. Bookings &amp; Payment</h4>
+            <ul>
+              <li>A booking is only confirmed once a 50% deposit has been received and the host has sent written confirmation.</li>
+              <li>The remaining balance is due no later than 7 days before check-in.</li>
+              <li>Bookings made within 7 days of check-in require full payment upfront.</li>
+              <li>Accepted payment methods: EFT / bank transfer (details provided on confirmation).</li>
+            </ul>
+            <h4>2. Cancellations &amp; Refunds</h4>
+            <ul>
+              <li>A booking deposit of 50% of the total stay cost is required to confirm your reservation. This deposit is non-refundable under all circumstances, including cancellations covered by the policy below.</li>
+              <li>14 or more days before check-in: full refund of all payments made, excluding the non-refundable booking deposit.</li>
+              <li>7–13 days before check-in: 50% refund of the total booking cost, excluding the non-refundable booking deposit.</li>
+              <li>Less than 7 days before check-in: no refund.</li>
+              <li>No-shows or early departures: no refund for unused nights.</li>
+            </ul>
+            <p>See our full <a href="#cancellation-policy">Cancellation Policy</a> below for peak season dates and other circumstances.</p>
+            <h4>3. Check-in &amp; Check-out</h4>
+            <ul>
+              <li>Check-in: 15:00 – Check-out: 10:00.</li>
+            </ul>
+            <h4>4. Guests &amp; Occupancy</h4>
+            <ul>
+              <li>The apartment sleeps a maximum of 6 guests.</li>
+              <li>The primary guest must be 18 years or older and is responsible for the conduct of all guests during the stay.</li>
+            </ul>
+            <h4>5. House Rules</h4>
+            <ul>
+              <li>No smoking inside the apartment.</li>
+              <li>No clothing or towels are allowed to be hung over the balcony rails.</li>
+              <li>Please respect quiet hours between 22:00 and 07:00 per complex rules.</li>
+            </ul>
+            <h4>6. Liability</h4>
+            <ul>
+              <li>The host is not liable for any loss, theft, injury, or damage to guests or their belongings during the stay, except where caused by the host's negligence.</li>
+              <li>Guests are liable for any damage caused to the property or its contents during their stay.</li>
+            </ul>
+            <h4>7. Personal Information</h4>
+            <ul>
+              <li>Information submitted via the booking enquiry form (name, email, phone, dates) is used only to process your booking and will not be shared with third parties.</li>
+            </ul>
+            <h4>8. Governing Law</h4>
+            <ul>
+              <li>These terms are governed by the laws of South Africa.</li>
+            </ul>
+          </div>
+        </details>
+        <details id="cancellation-policy" class="policy-accordion reveal">
+          <summary>Cancellation Policy</summary>
+          <div class="policy-content">
+            <p>We understand that plans can change. Please review our cancellation policy below before booking.</p>
+            <h4>Booking Deposit</h4>
+            <ul>
+              <li>A booking deposit of 50% of the total stay cost is required to confirm your reservation. This deposit is non-refundable under all circumstances, including cancellations covered by the policy below.</li>
+            </ul>
+            <h4>Cancellation Refunds</h4>
+            <ul>
+              <li>14 or more days before check-in: full refund of all payments made, excluding the non-refundable booking deposit.</li>
+              <li>7–13 days before check-in: 50% refund of the total booking cost, excluding the non-refundable booking deposit.</li>
+              <li>Less than 7 days before check-in: no refund.</li>
+              <li>No-shows or early departures: no refund for unused nights.</li>
+            </ul>
+            <h4>How to Cancel</h4>
+            <p>All cancellations must be submitted in writing via email to <a href="mailto:gsteyn1401@gmail.com">info@21devalle.co.za</a>. The cancellation date will be recorded as the date we receive your written notice.</p>
+            <h4>Date Changes</h4>
+            <p>If you need to change your dates rather than cancel, please contact us as early as possible. We will do our best to accommodate a rebooking free of charge, subject to availability, if the request is made 7 or more days before your original check-in date.</p>
+            <h4>Peak Season / High-Demand Dates</h4>
+            <p>For bookings over public holidays, festivals, and other high-demand periods, a stricter policy applies:</p>
+            <ul>
+              <li>30 or more days before check-in: full refund, excluding the non-refundable booking deposit.</li>
+              <li>14–29 days before check-in: 50% refund.</li>
+              <li>Less than 14 days before check-in: no refund.</li>
+            </ul>
+            <h4>Circumstances Beyond Your Control</h4>
+            <p>We recognise that unforeseen events, such as serious illness, injury, or government travel restrictions, can affect travel plans. In these cases, please contact us directly with supporting documentation. We will consider such requests on a case-by-case basis and may offer a partial refund, credit toward a future stay, or a date change at our discretion.</p>
+            <h4>Host-Initiated Cancellations</h4>
+            <p>In the rare event that we must cancel your booking (e.g., due to property issues beyond our control), we will notify you as soon as possible and provide a full refund of all payments made, including the booking deposit.</p>
+            <p class="policy-updated">This policy was last updated on 25 July 2026. By completing your booking, you agree to the terms outlined above.</p>
+          </div>
+        </details>
       </section>
 
       <section id="map" class="section alt-section">
@@ -302,7 +408,7 @@
         <div class="map-card reveal">
           <iframe
             title="Google Map of Diaz Beach, Mossel Bay"
-            src="https://www.google.com/maps?q=Diaz%20Beach%20Mossel%20Bay&z=13&output=embed"
+            src="https://www.google.com/maps?q=Beach+Boulevard+West%2C+Mossel+Bay%2C+6506&z=17&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
@@ -315,9 +421,9 @@
           <h2>Reach out for availability or to arrange a viewing</h2>
         </div>
         <div class="contact-card reveal">
-          <p><strong>Email:</strong> enquiries@21devalle.co.za</p>
-          <p><strong>Phone:</strong> +27 82 123 4567</p>
-          <p><strong>Location:</strong> Diaz Beach, Mossel Bay, South Africa</p>
+          <p><strong>Email:</strong> <a href="mailto:gsteyn1401@gmail.com">info@21devalle.co.za</a></p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/27848021196" target="_blank" rel="noopener noreferrer">084 802 1196</a></p>
+          <p><strong>Address:</strong> 21 De Valle, Beach Boulevard West, Diaz Beach, Mossel Bay</p>
         </div>
       </section>
     </main>
@@ -326,7 +432,7 @@
       <p>© 2026 21 De Valle. Your Coastal Escape in Mossel Bay.</p>
     </footer>
 
-    <a class="whatsapp-float" href="https://wa.me/27821234567" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">WhatsApp</a>
+    <a class="whatsapp-float" href="https://wa.me/27848021196" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">WhatsApp</a>
 
     <div class="lightbox" id="lightbox" aria-hidden="true">
       <button class="lightbox-close" type="button" aria-label="Close image">×</button>
@@ -335,6 +441,6 @@
       <button class="lightbox-nav next" type="button" aria-label="Next image">›</button>
     </div>
 
-    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/main.js?v=10"></script>
   </body>
 </html>

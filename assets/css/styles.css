@@ -7,6 +7,7 @@
   --text: #19333f;
   --muted: #64808b;
   --shadow: 0 24px 60px rgba(18, 56, 79, 0.12);
+  --booked-red: #c0392b;
 }
 
 * {
@@ -71,12 +72,35 @@ a {
   color: var(--navy);
 }
 
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(18, 56, 79, 0.14);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--navy);
+  border-radius: 2px;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 2rem;
   align-items: center;
-  padding: 4.5rem 2rem 3rem;
+  padding: 2.5rem 2rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -185,18 +209,18 @@ a {
 .section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 2.5rem 2rem;
 }
 
 .alt-section {
   background: rgba(220, 238, 244, 0.35);
   border-radius: 36px;
-  margin: 1.5rem auto;
+  margin: 0.75rem auto;
 }
 
 .section-heading {
   max-width: 700px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .section-heading h2 {
@@ -208,8 +232,6 @@ a {
 }
 
 .about-grid,
-.highlights-grid,
-.amenities-grid,
 .pricing-grid {
   display: grid;
   gap: 1.25rem;
@@ -219,21 +241,11 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.highlights-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.amenities-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .pricing-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .info-card,
-.highlight-card,
-.amenity-card,
 .pricing-card,
 .booking-copy,
 .contact-card,
@@ -241,8 +253,41 @@ a {
 .booking-form {
   background: white;
   border-radius: 24px;
-  padding: 1.5rem;
+  padding: 1.15rem;
   box-shadow: var(--shadow);
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.amenities-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.amenity-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.amenity-icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .price {
@@ -261,6 +306,17 @@ a {
   margin-top: 1rem;
   font-weight: 600;
   color: var(--navy);
+}
+
+.pricing-discount {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .gallery-grid {
@@ -342,10 +398,17 @@ a {
   color: var(--navy);
 }
 
+.day.is-available,
 .day.is-booked {
-  color: #9ea7ac;
+  background: var(--blue-soft);
+  color: var(--navy);
+}
+
+.day.is-booked {
+  background: #b7d6e3;
   text-decoration: line-through;
-  background: #eef2f4;
+  text-decoration-color: var(--booked-red);
+  text-decoration-thickness: 2px;
 }
 
 .day.is-muted {
@@ -374,7 +437,7 @@ a {
 }
 
 .dot.booked {
-  background: #9ea7ac;
+  background: var(--booked-red);
 }
 
 .booking-grid {
@@ -416,6 +479,76 @@ a {
   margin: 0;
   color: #2d6b42;
   font-weight: 600;
+}
+
+.form-terms-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.form-terms-note a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.policy-accordion {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 1.15rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.policy-accordion summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.1rem;
+  padding: 0.35rem 0;
+}
+
+.policy-accordion summary::marker {
+  color: var(--blue);
+}
+
+.policy-content {
+  margin-top: 1rem;
+  color: var(--text);
+}
+
+.policy-content h4 {
+  color: var(--navy);
+  margin: 1.25rem 0 0.4rem;
+}
+
+.policy-content h4:first-child {
+  margin-top: 0;
+}
+
+.policy-content ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.policy-content li {
+  margin-bottom: 0.35rem;
+}
+
+.policy-content p {
+  margin: 0.5rem 0;
+}
+
+.policy-content a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.policy-updated {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .map-card {
@@ -521,8 +654,6 @@ a {
   .hero,
   .booking-grid,
   .about-grid,
-  .highlights-grid,
-  .amenities-grid,
   .pricing-grid,
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
@@ -539,9 +670,34 @@ a {
 
 @media (max-width: 680px) {
   .site-header {
-    flex-direction: column;
-    gap: 0.75rem;
     padding: 1rem;
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(18, 56, 79, 0.08);
+    box-shadow: 0 16px 30px rgba(18, 56, 79, 0.1);
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    padding: 0.85rem 1.5rem;
+    border-top: 1px solid rgba(18, 56, 79, 0.06);
   }
 
   .hero,
@@ -550,13 +706,48 @@ a {
     padding-right: 1rem;
   }
 
-  .about-grid,
-  .highlights-grid,
-  .amenities-grid,
+  .hero-highlights {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.4rem;
+  }
+
+  .hero-highlights li {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .about-grid .info-card {
+    padding: 0.85rem;
+  }
+
+  .about-grid .info-card h3 {
+    font-size: 0.95rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .about-grid .info-card p {
+    font-size: 0.82rem;
+    margin: 0;
+  }
+
   .pricing-grid,
   .gallery-grid,
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .amenities-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
   .gallery-card img {
