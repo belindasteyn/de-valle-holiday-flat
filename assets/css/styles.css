@@ -250,11 +250,42 @@ a {
 .booking-copy,
 .contact-card,
 .calendar-card,
-.booking-form {
+.booking-form,
+.review-card {
   background: white;
   border-radius: 24px;
   padding: 1.15rem;
   box-shadow: var(--shadow);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.review-stars {
+  color: #d3a24a;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.6rem;
+}
+
+.review-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--navy);
+}
+
+.review-card p {
+  margin: 0 0 0.5rem;
+  color: var(--text);
+}
+
+.review-source {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0 !important;
 }
 
 .amenities-list {
@@ -655,7 +686,8 @@ a {
   .booking-grid,
   .about-grid,
   .pricing-grid,
-  .gallery-grid {
+  .gallery-grid,
+  .reviews-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -740,6 +772,7 @@ a {
 
   .pricing-grid,
   .gallery-grid,
+  .reviews-grid,
   .form-row {
     grid-template-columns: 1fr;
   }

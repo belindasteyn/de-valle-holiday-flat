@@ -42,6 +42,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   revealElements.forEach((element) => observer.observe(element));
 
+  const pricingGrid = document.querySelector("[data-pricing-grid]");
+  if (pricingGrid) {
+    fetch("pricing-rates.txt")
+      .then((response) => response.text())
+      .then((text) => {
+        text.split(/\r?\n/).forEach((line) => {
+          const trimmed = line.trim();
+          if (!trimmed || trimmed.startsWith("#")) {
+            return;
+          }
+          const parts = trimmed.split("|").map((part) => part.trim());
+          const [name, price, dates] = parts;
+          if (!name || !price) {
+            return;
+          }
+
+          const card = document.createElement("article");
+          card.className = "pricing-card reveal";
+
+          const heading = document.createElement("h3");
+          heading.textContent = name;
+          card.appendChild(heading);
+
+          const priceEl = document.createElement("p");
+          priceEl.className = "price";
+          const formattedPrice = Number(price).toLocaleString("en-US");
+          priceEl.append(`R${formattedPrice} `);
+          const span = document.createElement("span");
+          span.textContent = "/ night";
+          priceEl.appendChild(span);
+          card.appendChild(priceEl);
+
+          if (dates) {
+            const datesEl = document.createElement("p");
+            datesEl.textContent = dates;
+            card.appendChild(datesEl);
+          }
+
+          pricingGrid.appendChild(card);
+          observer.observe(card);
+        });
+      });
+  }
+
   const galleryImages = Array.from(document.querySelectorAll(".gallery-card img"));
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
