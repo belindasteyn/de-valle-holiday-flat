@@ -333,6 +333,13 @@ a {
   color: var(--muted);
 }
 
+.min-nights {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.4rem;
+}
+
 .pricing-note {
   margin-top: 1rem;
   font-weight: 600;

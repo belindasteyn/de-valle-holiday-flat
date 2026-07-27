@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>21 De Valle | Admin</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        max-width: 720px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        color: #222;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin-top: 2.5rem;
+      }
+      fieldset {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+      }
+      label {
+        display: block;
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      input[type="password"] {
+        width: 100%;
+        padding: 0.4rem;
+        box-sizing: border-box;
+        margin-bottom: 0.5rem;
+      }
+      .row {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-end;
+        border: 1px solid #ccc;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .row > div {
+        flex: 1;
+      }
+      .row button {
+        height: 2rem;
+      }
+      button {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+      }
+      .status {
+        font-weight: bold;
+        margin-top: 0.5rem;
+      }
+      .status.error {
+        color: #b00020;
+      }
+      .status.success {
+        color: #146c2e;
+      }
+      #app {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>21 De Valle — Admin</h1>
+
+    <div id="login">
+      <label for="password">Password</label>
+      <input type="password" id="password" />
+      <button id="unlock-button" type="button">Unlock</button>
+      <p id="login-status" class="status error"></p>
+    </div>
+
+    <div id="app">
+      <h2>Pricing Tariffs</h2>
+      <div id="pricing-rows"></div>
+      <button id="add-tariff-button" type="button">+ Add Tariff</button>
+      <br /><br />
+      <button id="save-pricing-button" type="button">Save Pricing</button>
+      <p id="pricing-status" class="status"></p>
+
+      <h2>Booked Dates</h2>
+      <div id="booking-rows"></div>
+      <button id="add-booking-button" type="button">+ Add Booking</button>
+      <br /><br />
+      <button id="save-bookings-button" type="button">Save Booked Dates</button>
+      <p id="bookings-status" class="status"></p>
+    </div>
+
+    <script>
+      const REPO_RAW_BASE = "https://raw.githubusercontent.com/belindasteyn/de-valle-holiday-flat/main/";
+      let adminPassword = sessionStorage.getItem("adminPassword") || "";
+
+      const splitHeaderAndLines = (text) => {
+        const lines = text.split(/\r?\n/);
+        const header = [];
+        let i = 0;
+        while (i < lines.length && lines[i].trim().startsWith("#")) {
+          header.push(lines[i]);
+          i += 1;
+        }
+        const rest = lines.slice(i).filter((line) => line.trim() !== "");
+        return { header, rest };
+      };
+
+      // ---------- Pricing ----------
+      let pricingHeader = [];
+
+      const parsePricingLine = (line) => {
+        const parts = line.split("|").map((part) => part.trim());
+        return { name: parts[0] || "", price: parts[1] || "", dates: parts[2] || "", minNights: parts[3] || "" };
+      };
+
+      const addPricingRow = (tariff) => {
+        const data = tariff || { name: "", price: "", dates: "", minNights: "" };
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = `
+          <div>
+            <label>Name</label>
+            <input type="text" class="tariff-name" value="${data.name}" />
+          </div>
+          <div>
+            <label>Price per night</label>
+            <input type="number" class="tariff-price" value="${data.price}" />
+          </div>
+          <div>
+            <label>Date range (optional)</label>
+            <input type="text" class="tariff-dates" value="${data.dates}" />
+          </div>
+          <div>
+            <label>Minimum nights (optional)</label>
+            <input type="number" class="tariff-min-nights" value="${data.minNights}" />
+          </div>
+          <button type="button" class="remove-row">Remove</button>
+        `;
+        row.querySelector(".remove-row").addEventListener("click", () => row.remove());
+        document.getElementById("pricing-rows").appendChild(row);
+      };
+
+      const loadPricing = () => {
+        fetch(`${REPO_RAW_BASE}pricing-rates.txt?cachebust=${Date.now()}`)
+          .then((response) => response.text())
+          .then((text) => {
+            const { header, rest } = splitHeaderAndLines(text);
+            pricingHeader = header;
+            document.getElementById("pricing-rows").innerHTML = "";
+            rest.forEach((line) => addPricingRow(parsePricingLine(line)));
+          })
+          .catch(() => {
+            document.getElementById("pricing-status").textContent = "Could not load pricing-rates.txt";
+            document.getElementById("pricing-status").className = "status error";
+          });
+      };
+
+      const savePricing = () => {
+        const rows = Array.from(document.querySelectorAll("#pricing-rows .row"));
+        const lines = rows.map((row) => {
+          const name = row.querySelector(".tariff-name").value.trim();
+          const price = row.querySelector(".tariff-price").value.trim();
+          const dates = row.querySelector(".tariff-dates").value.trim();
+          const minNights = row.querySelector(".tariff-min-nights").value.trim();
+          return `${name} | ${price} | ${dates} | ${minNights}`;
+        });
+        const content = pricingHeader.concat(lines).join("\n") + "\n";
+        saveFile("pricing-rates.txt", content, "pricing-status");
+      };
+
+      // ---------- Booked Dates ----------
+      let bookingsHeader = [];
+
+      const parseBookingLine = (line) => {
+        if (line.includes(" to ")) {
+          const [start, end] = line.split(" to ").map((part) => part.trim());
+          return { start, end };
+        }
+        return { start: line.trim(), end: "" };
+      };
+
+      const addBookingRow = (booking) => {
+        const data = booking || { start: "", end: "" };
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = `
+          <div>
+            <label>Start date</label>
+            <input type="date" class="booking-start" value="${data.start}" />
+          </div>
+          <div>
+            <label>End date (optional, for a range)</label>
+            <input type="date" class="booking-end" value="${data.end}" />
+          </div>
+          <button type="button" class="remove-row">Remove</button>
+        `;
+        row.querySelector(".remove-row").addEventListener("click", () => row.remove());
+        document.getElementById("booking-rows").appendChild(row);
+      };
+
+      const loadBookings = () => {
+        fetch(`${REPO_RAW_BASE}booked-dates.txt?cachebust=${Date.now()}`)
+          .then((response) => response.text())
+          .then((text) => {
+            const { header, rest } = splitHeaderAndLines(text);
+            bookingsHeader = header;
+            document.getElementById("booking-rows").innerHTML = "";
+            rest.forEach((line) => addBookingRow(parseBookingLine(line)));
+          })
+          .catch(() => {
+            document.getElementById("bookings-status").textContent = "Could not load booked-dates.txt";
+            document.getElementById("bookings-status").className = "status error";
+          });
+      };
+
+      const saveBookings = () => {
+        const rows = Array.from(document.querySelectorAll("#booking-rows .row"));
+        const lines = rows
+          .map((row) => {
+            const start = row.querySelector(".booking-start").value.trim();
+            const end = row.querySelector(".booking-end").value.trim();
+            if (!start) {
+              return null;
+            }
+            return end ? `${start} to ${end}` : start;
+          })
+          .filter(Boolean);
+        const content = bookingsHeader.concat(lines).join("\n") + "\n";
+        saveFile("booked-dates.txt", content, "bookings-status");
+      };
+
+      // ---------- Shared save call ----------
+      const saveFile = (path, content, statusElementId) => {
+        const statusEl = document.getElementById(statusElementId);
+        statusEl.textContent = "Saving...";
+        statusEl.className = "status";
+
+        fetch("/.netlify/functions/save-file", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: adminPassword, path, content })
+        }).then((response) => {
+          if (response.ok) {
+            statusEl.textContent = "Saved! The live site will update within about a minute.";
+            statusEl.className = "status success";
+          } else {
+            response.text().then((text) => {
+              statusEl.textContent = `Save failed: ${text}`;
+              statusEl.className = "status error";
+            });
+          }
+        }).catch((error) => {
+          statusEl.textContent = `Save failed: ${error.message}`;
+          statusEl.className = "status error";
+        });
+      };
+
+      // ---------- Login ----------
+      const unlock = () => {
+        const entered = document.getElementById("password").value;
+        if (!entered) {
+          document.getElementById("login-status").textContent = "Please enter a password.";
+          return;
+        }
+        adminPassword = entered;
+        sessionStorage.setItem("adminPassword", adminPassword);
+        document.getElementById("login").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        loadPricing();
+        loadBookings();
+      };
+
+      document.getElementById("unlock-button").addEventListener("click", unlock);
+      document.getElementById("password").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          unlock();
+        }
+      });
+      document.getElementById("add-tariff-button").addEventListener("click", () => addPricingRow());
+      document.getElementById("add-booking-button").addEventListener("click", () => addBookingRow());
+      document.getElementById("save-pricing-button").addEventListener("click", savePricing);
+      document.getElementById("save-bookings-button").addEventListener("click", saveBookings);
+
+      if (adminPassword) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        loadPricing();
+        loadBookings();
+      }
+    </script>
+  </body>
+</html>

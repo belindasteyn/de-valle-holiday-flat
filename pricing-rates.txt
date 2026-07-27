@@ -1,7 +1,7 @@
 # Pricing for 21 De Valle
-# One tariff per line, format: Name | Price per night (numbers only) | Date range (optional)
-# Leave the date range blank (nothing after the last |) if it doesn't apply, like Standard Tariff below.
+# One tariff per line, format: Name | Price per night (numbers only) | Date range (optional) | Minimum nights (optional)
+# Leave the date range blank (nothing between those |'s) if it doesn't apply, like Standard Tariff below.
 # Lines starting with # are ignored.
-Standard Tariff | 1150 |
-Seasonal Tariff 1 | 1650 | 25 Mar – 10 Apr & 25 Sep – 10 Oct
-Seasonal Tariff 2 | 2750 | 1 Dec – 22 Dec & 4 Jan – 20 Jan
+Standard Tariff | 1150 | | 2
+Seasonal Tariff 1 | 1650 | 25 Mar – 10 Apr & 25 Sep – 10 Oct | 10
+Seasonal Tariff 2 | 2750 | 1 Dec – 22 Dec & 4 Jan – 20 Jan | 10

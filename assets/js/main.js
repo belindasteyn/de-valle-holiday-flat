@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
           const parts = trimmed.split("|").map((part) => part.trim());
-          const [name, price, dates] = parts;
+          const [name, price, dates, minNights] = parts;
           if (!name || !price) {
             return;
           }
@@ -78,6 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const datesEl = document.createElement("p");
             datesEl.textContent = dates;
             card.appendChild(datesEl);
+          }
+
+          if (minNights) {
+            const minNightsEl = document.createElement("p");
+            minNightsEl.className = "min-nights";
+            minNightsEl.textContent = `Minimum ${minNights} night${Number(minNights) === 1 ? "" : "s"}`;
+            card.appendChild(minNightsEl);
           }
 
           pricingGrid.appendChild(card);
