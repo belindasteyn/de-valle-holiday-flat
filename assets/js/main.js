@@ -67,11 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const priceEl = document.createElement("p");
           priceEl.className = "price";
-          const formattedPrice = Number(price).toLocaleString("en-US");
-          priceEl.append(`R${formattedPrice} `);
-          const span = document.createElement("span");
-          span.textContent = "/ night";
-          priceEl.appendChild(span);
+          if (isNaN(Number(price))) {
+            priceEl.append(price);
+          } else {
+            const formattedPrice = Number(price).toLocaleString("en-US");
+            priceEl.append(`R${formattedPrice} `);
+            const span = document.createElement("span");
+            span.textContent = "/ night";
+            priceEl.appendChild(span);
+          }
           card.appendChild(priceEl);
 
           if (dates) {
